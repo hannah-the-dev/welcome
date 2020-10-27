@@ -1,0 +1,121 @@
+<!--DOCTYPE html-->
+<html>
+<head>
+    <title>계산기</title>
+    <style>
+        table {border-collapse: collapse;}
+        input {border:none; text-align:right;font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+        font-weight; bold;}
+        input:focus {outline: none; color: blueviolet;}
+        td {padding: 5px 10px;
+            text-align: center; }
+        table {
+            background-color: lavender;
+        }
+        .key {background-color:lightseagreen;
+
+        }
+    </style>
+</head>
+<body>
+    <table border="2">
+        <tr>
+            <td colspan="4">
+                <input type="text" id="display" autofocus maxlength="18">
+                
+        <!--        <script type ="text/javascript">
+                    document.getElementById('display').onblur = function(event) {var blurEl = this;
+                    setTimeout(function() {
+                        blurEl.focus()
+                    },10);
+                }
+                </script>
+            -->
+            </td>
+        </tr>
+        <tr>
+            <td colspan="4">
+                <input type="text" id="result" disabled>
+            </td>
+        </tr>
+        <tr>
+            <td colspan=3 onclick="reset()" class="key">AC
+               
+            </td>
+            <td onclick="add('/')">÷</td>
+        <tr>
+            <td onclick="add(7)" class="key">7</td>
+            <td onclick="add(8)" class="key">8</td>
+            <td onclick="add(9)" class="key">9</td>
+            <td onclick="add('*')">×</td>
+        </tr>
+        <tr>
+            <td onclick="add(4)" class="key">4</td>
+            <td onclick="add(5)" class="key">5</td>
+            <td onclick="add(6)" class="key">6</td>
+            <td onclick="add('-')">-</td>
+        </tr>
+        <tr>
+            <td onclick="add(1)" class="key">1</td>
+            <td onclick="add(2)" class="key">2</td>
+            <td onclick="add(3)" class="key">3</td>
+            <td onclick="add('+')">+</td>
+        </tr>
+        <tr>
+            <td colspan="2" class="key">0</td>
+            <td onclick="add('.')">.</td>
+            <td onclick="calculate()">=</td>
+        </tr>
+    </table>
+    
+    <script>
+        
+    //   function add(char) {
+    //        var display = document.getElementById('display');
+    //        display.value = display.value + char;
+    //    }
+
+        var numberClicked = false;
+        function add(char) {
+            if(numberClicked == false) {        //연산자를 입력한 다음에
+                if(isNaN(char) == true) {       //또 연산자를 받으면              
+                                                //아무것도 안 함
+                } else {                        //연산자가 아니라면
+                    document.getElementById('display').value += char; //식 뒤에 값 추가
+                }
+            } else {document.getElementById('display').value += char;
+            } 
+        
+            //계산을 위해 숫자인지 연산자인지 기억하기
+        if(isNaN(char) == true) {    //만약 연산자를 눌렀으면,
+            numberClicked = false;  //numberclicked를 false 로 만듦
+        } else {
+            numberClicked = true;      //numberclicked를 true로 만듦
+        }
+    
+        }
+  
+
+        function calculate() {
+            var display = document.getElementById('display');
+            var result = eval(display.value);
+            document.getElementById('result').value = result;
+        }
+        function reset() {
+            document.getElementById('display').value = "";
+            document.getElementById('result').value = "";
+                }
+        type ="text/javascript"
+        document.getElementById('display').onblur = function(event) {var blurEl = this;
+        setTimeout(function() {
+            blurEl.focus()
+        },10);
+        }
+        
+        
+    </script>
+
+
+</body>
+
+</html>
